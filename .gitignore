@@ -1,0 +1,5 @@
+.env
+
+*.bag
+imgs/
+*.jpg
