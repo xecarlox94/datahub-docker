@@ -1,5 +1,5 @@
 .env
 
 *.bag
-imgs/
+imgs*/
 *.jpg

@@ -24,7 +24,7 @@ base_container_folder = './'
 
 file_name = os.getenv("FILE")
 
-file_name = "data.bag"
+file_name = "test.bag"
 
 file_path = os.path.join(base_container_folder, file_name)
 
@@ -32,7 +32,7 @@ file_base_name = file_name.split('.')[0]
 
 
 
-with AnyReader([Path("aris.bag")]) as reader:
+with AnyReader([Path("test.bag")]) as reader:
 
     connections = reader.connections
 
@@ -55,7 +55,7 @@ with AnyReader([Path("aris.bag")]) as reader:
 
         img_file_path = os.path.join(
             base_container_folder,
-            ("imgs-"+file_base_name),
+            ("imgs"),
             f'{timestamp}.jpg'
         )
 

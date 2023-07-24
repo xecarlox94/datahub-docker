@@ -65,4 +65,7 @@ RUN echo "blobfuse2 mount ~/mycontainer --config-file=./config.yaml" >> ~/.bashr
 RUN echo "cd ~/mycontainer/" >> ~/.bashrc
 RUN echo "source set_env.sh" >> ~/.bashrc
 
-RUN echo "/run_demo.sh" >> ~/.bashrc
+#RUN echo "/run_demo.sh" >> ~/.bashrc
+
+
+
