@@ -5,64 +5,71 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 
 RUN apt-get update \
-    && apt-get install wget vim -y \
-    && wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb \
-    && dpkg -i packages-microsoft-prod.deb \
-    && apt-get update \
-    && apt-get install libfuse3-dev fuse3 -y \
-    && apt-get install blobfuse2 -y \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-
-
-
-
-# Install apt-getable dependencies
-RUN apt-get update \
     && apt-get install -y \
-        build-essential \
-        cmake \
-        git \
-        libeigen3-dev \
-        libopencv-dev \
-        libceres-dev \
-        python3-dev \
-        python3-numpy \
-        python3-opencv \
-        python3-pip \
-        python3-pyproj \
-        python3-scipy \
-        python3-yaml \
-        curl \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    	wget \
+    	vim \
+    	git \
+        make \
+        g++ \
+    && wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb \
+    && dpkg -i \
+    	packages-microsoft-prod.deb \
+    && rm packages-microsoft-prod.deb \
+    && apt-get update \
+    && apt-get install -y \
+    	libfuse3-dev \
+    	fuse3 \
+    && apt-get install -y \
+    	blobfuse2 \
+    && rm -rf \
+    	/var/lib/apt/lists/* \
+    	/tmp/* \
+    	/var/tmp/* \
+    && mkdir ~/mycontainer
 
 
 
-RUN git clone --recursive https://github.com/mapillary/OpenSfM
-WORKDIR "/OpenSfM"
-RUN pip3 install -r requirements.txt \
-    &&  python3 setup.py build
+# Install required packages using apt-get
+RUN apt-get update && \
+    apt-get install -y \
+        libjpeg-dev \
+        libpng-dev \
+        libtiff-dev \
+        libgl-dev \
+        qt5-qmake \
+        qt5-default \
+    && rm -rf /var/lib/apt/lists/* \
+    && git config --global user.email "coenadas.nr@gmail.com" \
+    && git clone --recursive https://github.com/simonfuhrmann/mve.git
+
+WORKDIR "/mve"
+
+# Set the working directory and create the bin directory
+#RUN mkdir   
+RUN make -j8
+# Build the application using 'make all'
+#RUN make all
+
+
+#ENV PATH="${PATH}:/mve/bin"
+
+
+
+
+
+#ENV PATH="${PATH}:/"
+#
 WORKDIR "/"
-
-ENV PATH="${PATH}:/OpenSfM/bin"
-ENV PATH="${PATH}:/"
-
-
-
-
+#
 COPY . .
+WORKDIR "/mve"
+#RUN pip3 install -r requirements.txt
 
+#WORKDIR "~"
 
-RUN pip3 install -r requirements.txt
-
-RUN mkdir ~/mycontainer
-RUN rm packages-microsoft-prod.deb
-
-
-RUN echo "echo \"  subdirectory: \\\"\$SUB_DIR\\\"\" >> /config.yaml" >> ~/.bashrc
-RUN echo "blobfuse2 mount ~/mycontainer --config-file=./config.yaml" >> ~/.bashrc
-RUN echo "cd ~/mycontainer/" >> ~/.bashrc
-RUN echo "source set_env.sh" >> ~/.bashrc
-
-RUN echo "/run_demo.sh" >> ~/.bashrc
+#RUN echo "echo \"  subdirectory: \\\"\$SUB_DIR\\\"\" >> /config.yaml" >> ~/.bashrc
+#RUN echo "blobfuse2 mount ~/mycontainer --config-file=./config.yaml" >> ~/.bashrc
+#RUN echo "cd ~/mycontainer/" >> ~/.bashrc
+#RUN echo "source set_env.sh" >> ~/.bashrc
+#
+#RUN echo "/run_demo.sh" >> ~/.bashrc

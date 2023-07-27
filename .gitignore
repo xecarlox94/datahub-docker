@@ -1,5 +1,11 @@
 .env
 
+.ipy*
+
+scene/*
+
 *.bag
-imgs*/
+
+im*/
+
 *.jpg
