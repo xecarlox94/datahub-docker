@@ -31,6 +31,7 @@ file_path = os.path.join(base_container_folder, file_name)
 file_base_name = file_name.split('.')[0]
 
 
+ii = 0
 
 with AnyReader([Path("test.bag")]) as reader:
 
@@ -40,6 +41,8 @@ with AnyReader([Path("test.bag")]) as reader:
 
 
     for message in messages:
+
+        if ii > 20: break
 
         connection, timestamp, rawdata = message
 
@@ -64,3 +67,5 @@ with AnyReader([Path("test.bag")]) as reader:
         _mkdir(folder_name)
 
         cv2.imwrite(img_file_path, array)
+
+        ii = ii + 1

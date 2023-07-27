@@ -1,5 +1,10 @@
 #!/usr/bin/bash
 
+
+mkdir -p ~/mycontainer/imgs/
+
+python3 /preproc_ros.py
+
 cd ~/mycontainer/imgs/
 
 images=$(ls | tr "\n" " " | awk 'NF=10')

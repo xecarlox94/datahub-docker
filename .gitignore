@@ -1,5 +1,4 @@
+demo
 .env
-
 *.bag
-imgs*/
-*.jpg
+img*
