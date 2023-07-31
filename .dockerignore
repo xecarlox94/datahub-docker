@@ -5,3 +5,6 @@ imgs/
 
 run_build.sh
 run.sh
+
+
+jupyter_notebooks/*

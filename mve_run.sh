@@ -1,21 +1,22 @@
-#!/bin/bash
-
-# Clone the GitHub repository
-git clone https://github.com/simonfuhrmann/mve.git
-
-# Navigate into the cloned repository directory
-cd mve
+#!/usr/bin/bash
 
 
-# Build the software
-make -j8
+MVE=/home/coena98/mve/apps
+
+DATA=/home/coena98/olter
 
 
-# Navigate to the umve directory
-cd apps/umve/
-qmake && make -j8
+$MVE/makescene/makescene -i $DATA/enhanced_images $DATA/scene2
 
-#run the visulization software
-./umve /home/coena98/olter/scene
+$MVE/sfmrecon/sfmrecon $DATA/scene2
+
+$MVE/dmrecon/dmrecon -s2 $DATA/scene2
+
+$MVE/scene2pset/scene2pset -F2 $DATA/scene2 $DATA/scene2/pset-L2.ply
+
+$MVE/fssrecon/fssrecon $DATA/scene2/pset-L2.ply $DATA/scene2/surface-L2.ply
+
+$MVE/meshclean/meshclean -t10 $DATA/scene2/surface-L2.ply $DATA/scene2/surface-L2-clean.ply
 
 
+echo "Done!"
