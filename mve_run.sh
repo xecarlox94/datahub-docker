@@ -1,22 +1,23 @@
 #!/usr/bin/bash
 
 
-MVE=/home/coena98/mve/apps
+MVE=/home/jcc2000/Sources/mve/apps
 
-DATA=/home/coena98/olter
+DATA=/home/jcc2000/Desktop/datahub-docker
 
+IMG_DIR="$DATA/scene"
 
-$MVE/makescene/makescene -i $DATA/enhanced_images $DATA/scene2
+$MVE/makescene/makescene -i $DATA/enhanced_images $IMG_DIR
 
-$MVE/sfmrecon/sfmrecon $DATA/scene2
+$MVE/sfmrecon/sfmrecon $IMG_DIR
 
-$MVE/dmrecon/dmrecon -s2 $DATA/scene2
+$MVE/dmrecon/dmrecon -s2 $IMG_DIR
 
-$MVE/scene2pset/scene2pset -F2 $DATA/scene2 $DATA/scene2/pset-L2.ply
+$MVE/scene2pset/scene2pset -F2 $IMG_DIR $IMG_DIR/pset-L2.ply
 
-$MVE/fssrecon/fssrecon $DATA/scene2/pset-L2.ply $DATA/scene2/surface-L2.ply
+$MVE/fssrecon/fssrecon $IMG_DIR/pset-L2.ply $IMG_DIR/surface-L2.ply
 
-$MVE/meshclean/meshclean -t10 $DATA/scene2/surface-L2.ply $DATA/scene2/surface-L2-clean.ply
+$MVE/meshclean/meshclean -t10 $IMG_DIR/surface-L2.ply $IMG_DIR/surface-L2-clean.ply
 
 
 echo "Done!"
