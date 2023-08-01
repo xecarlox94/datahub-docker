@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 
 
-export CONTAINER=$(cat /config.yaml \
-	| grep container \
-	| sed 's/^[ \t]*//;s/[ \t]*$//' \
-    | tr -d '"' \
-	| awk '{print $2}')
+echo "  subdirectory: \"$SUB_DIR\"" >> ./config.yaml
 
-export SUB_DIR=$(cat /config.yaml \
-	| grep subdirectory \
-	| sed 's/^[ \t]*//;s/[ \t]*$//' \
-    | tr -d '"' \
-	| awk '{print $2}')
+blobfuse2 mount ~/mycontainer --config-file=./config.yaml
+
+cd ~/mycontainer/
+
+
+export CONTAINER=$(\
+    cat /config.yaml \
+        | grep container \
+        | sed 's/^[ \t]*//;s/[ \t]*$//' \
+        | tr -d '"' \
+        | awk '{print $2}')
