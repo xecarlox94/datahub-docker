@@ -25,8 +25,9 @@ attr_cache:
 
 azstorage:
   type: adls
-  account-name: "dlsdatahubdemouksouth"
-  account-key: "cl7bX8t06DY0x+HwlMLgA6o04AcgkZOR0ZJp6IqLHfYoVessSFHVsXQ3WfAzPxAkNefjmZFLuDzk+ASta0+p7Q=="
+  account-name: <acc_name>
+  account-key: <acc_key>
   virtual-directory: true
   mode: key
-  container: "ci-datahub-publisher-container"
+  container: <container>
+  subdirectory: <sub_dir>

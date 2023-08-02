@@ -1,10 +1,10 @@
 #!/bin/sh
 
-
 sudo docker run \
     -e SUB_DIR='rosbag_dataset' \
     -e FILE='test.bag' \
     -e CONTAINER='ci-datahub-publisher-container' \
+    -e ACCOUNT_NAME='dlsdatahubdemouksouth' \
     --env-file=.env \
     -m="5g" \
     --privileged -it --rm  \
