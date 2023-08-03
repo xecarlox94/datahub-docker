@@ -12,5 +12,5 @@ sed -i "\
         --config-file=/config.yaml \
     && rm /config.yaml \
     && cd ~/mycontainer/ \
-    && sed -i "/\. \/\.set_env.sh/d" ~/.bashrc
+    && sed -i "/\. \/set_env.sh/d" ~/.bashrc
 
