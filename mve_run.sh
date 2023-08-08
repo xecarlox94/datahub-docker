@@ -1,10 +1,6 @@
 #!/usr/bin/bash
 
 
-MVE=/home/jcc2000/Sources/mve/apps
-
-DATA=/home/jcc2000/Desktop/datahub-docker
-
 
 
 IMG_DIR="$DATA/scene"

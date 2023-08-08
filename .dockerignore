@@ -2,9 +2,13 @@
 imgs/
 .env
 
+.config/build_run.sh
+.config/run.sh
 
 run_build.sh
 run.sh
 
+Dockerfile
 
 jupyter_notebooks/*
+
