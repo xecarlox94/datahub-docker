@@ -6,5 +6,9 @@ imgs/
 run_build.sh
 run.sh
 
+Dockerfile
 
 jupyter_notebooks/*
+
+
+enhanced_images/
